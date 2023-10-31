@@ -1,0 +1,11 @@
+class Premium(
+    customerId: String,
+    customerName: String,
+    phoneNumber: String
+) : Customer(customerId, customerName, phoneNumber, "Premium") {
+    override fun payBill(totalAmount: Double): Double {
+        val discount = 0.40
+        val deliveryCharge = 0.0
+        return (1 - discount) * totalAmount + deliveryCharge
+    }
+}

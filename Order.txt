@@ -1,0 +1,53 @@
+class Order {
+    private val selectedItems = mutableMapOf<String, Int>()
+
+    fun selectFoodItems(menu: Menu) {
+        menu.displayMenu()
+        println("Please select food items and quantity (e.g., '1 2' for item 1 with 2 quantity). Enter 'done' when you're finished:")
+
+        while (true) {
+            val choice = readLine() ?: ""
+            if (choice.equals("done", ignoreCase = true)) {
+                break
+            }
+
+            val parts = choice.split(" ")
+            if (parts.size != 2) {
+                println("Invalid input format. Please provide item number and quantity separated by a space.")
+                continue
+            }
+
+            val itemNumber = parts[0].toIntOrNull()
+            val quantity = parts[1].toIntOrNull()
+
+            if (itemNumber != null && quantity != null) {
+                val itemName = menu.getItemName(itemNumber)
+                if (itemName != "Unknown Item") {
+                    selectedItems[itemName] = selectedItems.getOrDefault(itemName, 0) + quantity
+                } else {
+                    println("Invalid item number. Please select a valid item number.")
+                }
+            } else {
+                println("Invalid input. Please provide a valid item number and quantity.")
+            }
+        }
+    }
+
+    fun calculateTotalBill(menu: Menu): Double {
+        var totalBill = 0.0
+
+        for ((item, quantity) in selectedItems) {
+            val itemPrice = menu.getPrice(item)
+            totalBill += itemPrice * quantity
+        }
+
+        return totalBill
+    }
+
+    fun displaySelectedItems() {
+        println("Selected Items:")
+        for ((item, quantity) in selectedItems) {
+            println("$item - Quantity: $quantity")
+        }
+    }
+}

@@ -1,0 +1,11 @@
+class Regular(
+    customerId: String,
+    customerName: String,
+    phoneNumber: String
+) : Customer(customerId, customerName, phoneNumber, "Regular") {
+    override fun payBill(totalAmount: Double): Double {
+        val discount = 0.20
+        val deliveryCharge = 10.0
+        return (1 -discount) * totalAmount + deliveryCharge
+    }
+}

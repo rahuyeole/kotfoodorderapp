@@ -1,0 +1,57 @@
+class Menu {
+    private val snacksMenu = mapOf(
+        1 to "Chips",
+        2 to "Sevpuri",
+        3 to "Bhel",
+        4 to "Fruit Bowl",
+        5 to "Upma"
+    )
+
+    private val mealMenu = mapOf(
+        6 to "Biryani",
+        7 to "Thali",
+        8 to "Pav Bhaji",
+        9 to "Dosa"
+    )
+
+    fun displayMenu() {
+        println("Please select an option:")
+        println("1. Snacks")
+        println("2. Meal")
+        val choice = readLine()?.toIntOrNull()
+
+        when (choice) {
+            1 -> displayItems(snacksMenu, "Snacks Menu")
+            2 -> displayItems(mealMenu, "Meal Menu")
+            else -> println("Invalid choice. Please select 1 for Snacks or 2 for Meal.")
+        }
+    }
+
+    private fun displayItems(menu: Map<Int, String>, menuName: String) {
+        println("$menuName:")
+        for ((itemNumber, itemName) in menu) {
+            val itemPrice = getPrice(itemName)  // Retrieve item price using getPrice method
+            println("$itemNumber. $itemName - Price: $${itemPrice}")
+        }
+    }
+
+    fun getPrice(itemName: String): Double {
+        val priceMap = mapOf(
+            "Chips" to 5.0,
+            "Sevpuri" to 10.0,
+            "Bhel" to 5.0,
+            "Fruit Bowl" to 10.0,
+            "Upma" to 5.0,
+            "Biryani" to 50.0,
+            "Thali" to 100.0,
+            "Pav Bhaji" to 100.0,
+            "Dosa" to 100.0
+        )
+        return priceMap[itemName] ?: 0.0
+    }
+
+    fun getItemName(itemNumber: Int): String {
+        val menu = if (snacksMenu.containsKey(itemNumber)) snacksMenu else mealMenu
+        return menu[itemNumber] ?: "Unknown Item"
+    }
+}

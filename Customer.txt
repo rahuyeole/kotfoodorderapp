@@ -1,0 +1,19 @@
+open class Customer(
+    val customerId: String,
+    val customerName: String,
+    val phoneNumber: String,
+    val membershipType: String
+) : Payable {
+    override fun payBill(totalAmount: Double): Double {
+        // Default implementation for customers (e.g., no discount)
+        return totalAmount + 30.0
+    }
+
+    fun displayCustomerDetails() {
+        println("Customer Details:")
+        println("Customer ID: $customerId")
+        println("Customer Name: $customerName")
+        println("Phone Number: $phoneNumber")
+        println("Membership Type: $membershipType")
+    }
+}

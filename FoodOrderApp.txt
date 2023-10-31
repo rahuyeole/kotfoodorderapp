@@ -1,0 +1,53 @@
+fun main() {
+    // Create Restaurant instance with details
+    val restaurant = Restaurant("123-456-7890", "123 Main St", "GST123456")
+    restaurant.displayRestaurantDetails()
+
+    // Add Customer details
+    print("Enter Customer ID: ")
+    val customerId = readLine() ?: ""
+    print("Enter Customer Name: ")
+    val customerName = readLine() ?: ""
+    print("Enter Phone Number: ")
+    val phoneNumber = readLine() ?: ""
+
+    print("Enter Membership Type (1 for Regular, 2 for Premium, or 3 for Guest): ")
+    val membershipChoice = readLine()?.toIntOrNull()
+
+    // Determine the appropriate customer type based on the choice
+    val customer = when (membershipChoice) {
+        1 -> Regular(customerId, customerName, phoneNumber)
+        2 -> Premium(customerId, customerName, phoneNumber)
+        3 -> Guest(customerId, customerName, phoneNumber)
+        else -> {
+            println("Invalid choice. Assuming Regular membership.")
+            Regular(customerId, customerName, phoneNumber)
+        }
+    }
+
+    // Display customer details
+    customer.displayCustomerDetails()
+
+    // Create Menu instance and display menu options
+    val menu = Menu()
+    //menu.displayMenu()
+
+    // Create Order instance and select food items
+    val order = Order()
+    order.selectFoodItems(menu)
+
+    // Calculate the total bill based on selected items
+    val totalBill = order.calculateTotalBill(menu)
+
+    // Calculate the final bill based on the customer type
+    val finalBill = customer.payBill(totalBill)
+
+    // Display the final bill
+    restaurant.displayRestaurantDetails()
+    println("Total Bill: $totalBill")
+    println("Final Bill (After Discount): $finalBill")
+
+    println("Thankyou !!! Your order will be delivered to you soon.")
+
+    // Implement the rest of the logic for order processing here
+}

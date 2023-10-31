@@ -1,0 +1,12 @@
+class Restaurant(
+    val contactNumber: String,
+    val address: String,
+    val gstNumber: String
+) {
+    fun displayRestaurantDetails() {
+        println("Restaurant Details:")
+        println("Contact Number: $contactNumber")
+        println("Address: $address")
+        println("GST Number: $gstNumber")
+    }
+}

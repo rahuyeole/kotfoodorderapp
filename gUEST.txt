@@ -1,0 +1,10 @@
+class Guest(
+    customerId: String,
+    customerName: String,
+    phoneNumber: String
+) : Customer(customerId, customerName, phoneNumber, "Guest") {
+    override fun payBill(totalAmount: Double): Double {
+        val deliveryCharge = 30.0
+        return totalAmount + deliveryCharge
+    }
+}
